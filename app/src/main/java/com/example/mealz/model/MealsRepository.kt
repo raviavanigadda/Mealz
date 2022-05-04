@@ -1,5 +1,7 @@
 package com.example.mealz.model
 
-class MealsRepository {
+import com.example.mealz.model.response.MealsCategoriesResponse
 
+class MealsRepository {
+    fun getMeals() : MealsCategoriesResponse = MealsCategoriesResponse(arrayListOf())
 }
