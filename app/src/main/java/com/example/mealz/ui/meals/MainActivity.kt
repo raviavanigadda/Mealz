@@ -34,21 +34,11 @@ fun MealsCategoriesScreen() {
     //special syntax, the view model should be type of MealsCategoriesViewModel.
     //It will live as long as this composable lives
     val viewModel : MealsCategoriesViewModel = viewModel()
-    val rememberedMeals : MutableState<List<MealsResponse>> = remember {
-        mutableStateOf(emptyList<MealsResponse>())
-    }
-    val coroutineScope = rememberCoroutineScope()
-
-    LaunchedEffect(key1 = "GET_MEALS"){
-        coroutineScope.launch(Dispatchers.IO) {
-            val meals = viewModel.getMeals()
-            rememberedMeals.value = meals
-        }
-    }
+    val meals = viewModel.mealsState.value
 
     LazyColumn {
-        items(rememberedMeals.value) {
-            meal ->  Text(text = "${meal.name}")
+        items(meals) {
+            meal ->  Text(text = meal.name)
         }
     }
 
